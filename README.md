@@ -1,3 +1,8 @@
+![Windows Server](https://img.shields.io/badge/Windows_Server-2025-blue)
+![Active Directory](https://img.shields.io/badge/Active_Directory-Configured-success)
+![VirtualBox](https://img.shields.io/badge/Oracle_VirtualBox-Lab-orange)
+![Windows 11](https://img.shields.io/badge/Windows_11-Domain_Joined-success)
+
 # Active Directory Lab
 
 > Windows Server 2025 Active Directory environment built in Oracle VirtualBox featuring AD DS, DNS, Group Policy, Organizational Units, domain users, and a Windows 11 domain-joined workstation.
@@ -344,7 +349,29 @@ Successfully confirmed:
 * VirtualBox Configuration
 
 ---
+## What I Learned
 
+- Active Directory Domain Services deployment
+- DNS configuration and troubleshooting
+- Group Policy creation and validation
+- Organizational Unit design
+- Domain user administration
+- Windows 11 domain joins
+- PowerShell troubleshooting
+- VirtualBox networking configuration
+
+---
+## Business Value
+
+This lab simulates a small enterprise Windows environment and demonstrates the ability to:
+
+- Manage domain users and computers
+- Implement centralized policy management
+- Troubleshoot authentication and DNS issues
+- Maintain Active Directory infrastructure
+- Support Windows endpoints in a domain environment
+
+---
 # Future Enhancements
 
 Planned additions to this lab:
