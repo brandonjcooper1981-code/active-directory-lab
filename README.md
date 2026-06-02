@@ -1,5 +1,6 @@
 # Active Directory Lab
 
+> Windows Server 2025 Active Directory environment built in Oracle VirtualBox featuring AD DS, DNS, Group Policy, Organizational Units, domain users, and a Windows 11 domain-joined workstation.
 ## Overview
 
 This project documents the deployment and administration of a Windows Server 2025 Active Directory environment built in Oracle VirtualBox. The lab demonstrates core Windows Server administration skills including Active Directory Domain Services (AD DS), DNS, Organizational Units (OUs), Group Policy Objects (GPOs), domain user management, workstation domain joins, and troubleshooting.
@@ -66,7 +67,19 @@ This project documents the deployment and administration of a Windows Server 202
 * Command Prompt
 
 ---
+## Key Accomplishments
 
+- Deployed Windows Server 2025 Domain Controller
+- Configured Active Directory Domain Services (AD DS)
+- Configured DNS for domain resolution
+- Created Organizational Units (OUs)
+- Created and managed domain users
+- Joined Windows 11 workstation to domain
+- Created and linked Group Policy Objects (GPOs)
+- Verified policy application using gpresult
+- Troubleshot networking and DNS issues
+
+---  
 # Active Directory Configuration
 
 ## Organizational Units
