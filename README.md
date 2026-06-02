@@ -92,7 +92,12 @@ Created Organizational Units (OUs) to logically separate users, computers, and a
 
 ## Domain Controller Network Configuration
 
-DC01 was configured with a static IP address and DNS services to support Active Directory and domain authentication.
+DC01 was configured with a static IP address and DNS services to support Active Directory Domain Services (AD DS) and domain authentication within the lab environment.
+
+- Hostname: DC01
+- Domain: lab.local
+- IPv4 Address: 192.168.56.10
+- DNS Server: 192.168.56.10
 
 ![DC01 Network Configuration](screenshots/01-dc01-ipconfig.png)
 
