@@ -351,7 +351,17 @@ Was denied access to:
 - Access control
 - Group Policy drive mapping
 - Least privilege
-
+- Active Directory Domain Services (AD DS)
+- DNS Administration
+- Organizational Unit (OU) Management
+- Group Policy Management
+- Windows Server 2025 Administration
+- Windows 11 Domain Integration
+- SMB File Sharing
+- Security Group Administration
+- User and Computer Account Management
+- Network Troubleshooting
+- VirtualBox Virtualization
 # Troubleshooting
 
 ## Issue: CLIENT01 Unable to Reach Domain Controller
