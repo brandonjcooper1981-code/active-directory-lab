@@ -3,13 +3,26 @@
 ![VirtualBox](https://img.shields.io/badge/Oracle_VirtualBox-Lab-orange)
 ![Windows 11](https://img.shields.io/badge/Windows_11-Domain_Joined-success)
 
-# Active Directory Lab
+# Windows Server 2025 Enterprise Lab
 
 > Windows Server 2025 Active Directory environment built in Oracle VirtualBox featuring AD DS, DNS, Group Policy, Organizational Units, domain users, and a Windows 11 domain-joined workstation.
 ## Overview
 
 This project documents the deployment and administration of a Windows Server 2025 Active Directory environment built in Oracle VirtualBox. The lab demonstrates core Windows Server administration skills including Active Directory Domain Services (AD DS), DNS, Organizational Units (OUs), Group Policy Objects (GPOs), domain user management, workstation domain joins, and troubleshooting.
+---
+## Table of Contents
 
+- [Overview](#overview)
+- [Lab Architecture](#lab-architecture)
+- [Network Diagram](#network-diagram)
+- [Technologies Used](#technologies-used)
+- [Active Directory Configuration](#active-directory-configuration)
+- [Group Policy Configuration](#group-policy-configuration)
+- [File Server & NTFS Permissions Lab](#file-server--ntfs-permissions-lab)
+- [Validation](#validation)
+- [Troubleshooting](#troubleshooting)
+- [Skills Demonstrated](#skills-demonstrated)
+- [Future Enhancements](#future-enhancements)
 ---
 
 ## Lab Architecture
@@ -167,8 +180,6 @@ Verified Policies:
 
 ---
 
-# Validation
-
 ## Connectivity Verification
 
 ```cmd
@@ -231,6 +242,115 @@ Applied Policies:
 * Default Domain Policy
 
 ---
+
+# File Server & NTFS Permissions Lab
+
+## Objective
+
+Implement role-based access control (RBAC) using Active Directory security groups, SMB shares, and NTFS permissions.
+
+## Security Groups
+
+Created security groups for departmental access control.
+
+![Security Groups](screenshots/06-security-groups.png)
+- IT_RW
+- HR_RW
+- Sales_RW
+
+## Folder Structure
+
+```text
+C:\Shares
+├── IT
+├── HR
+└── Sales
+```
+
+## Permissions Model
+
+### Share Permissions
+
+Configured SMB share permissions.
+
+![Share Permissions](screenshots/08-it-share-permissions.png)
+
+Authenticated Users:
+- Full Control
+
+### NTFS Permissions
+
+Configured least-privilege NTFS permissions.
+
+![NTFS Permissions](screenshots/07-ntfs-permissions.png)
+IT Folder:
+- IT_RW → Modify
+
+HR Folder:
+- HR_RW → Modify
+
+Sales Folder:
+- Sales_RW → Modify
+
+## Validation
+
+Verified domain controller network configuration.
+
+![DC01 IP Configuration](screenshots/01-dc01-ipconfig.png)
+
+Verified successful domain login.
+
+![Domain User Login](screenshots/02-domain-user-login.png)
+
+### Authorized Access
+
+Verified that LAB\jsmith could access the IT share.
+
+![IT Share Access](screenshots/09-it-share-success.png)
+User:
+
+```text
+LAB\jsmith
+```
+
+Successfully accessed:
+
+```text
+\\DC01\IT
+```
+
+### Unauthorized Access
+
+Verified that LAB\jsmith was denied access to the HR share.
+
+![Access Denied](screenshots/10-hr-access-denied.png)
+User:
+
+```text
+LAB\jsmith
+```
+
+Was denied access to:
+
+```text
+\\DC01\HR
+```
+
+## Skills Demonstrated
+
+- Active Directory Administration
+- SMB File Sharing
+- NTFS Permissions
+- Role-Based Access Control (RBAC)
+- Security Groups
+- Least Privilege Access
+- Windows Server Administration
+- File sharing
+- NTFS permissions
+- Security groups
+- Access control
+- Group Policy drive mapping
+- Least privilege
 
 # Troubleshooting
 
@@ -339,6 +459,8 @@ Successfully confirmed:
 * Group Policy Security Controls
 * Domain Authentication
 * Access Management
+
+---
 
 ## Troubleshooting
 
