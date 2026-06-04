@@ -332,6 +332,31 @@ Successfully confirmed:
 
 ---
 
+## What I Learned
+
+- Active Directory Domain Services deployment
+- DNS configuration and troubleshooting
+- Group Policy creation and validation
+- Organizational Unit design
+- Domain user administration
+- Windows 11 domain joins
+- PowerShell troubleshooting
+- VirtualBox networking configuration
+
+---
+
+## Business Value
+
+This lab simulates a small enterprise Windows environment and demonstrates the ability to:
+
+- Manage domain users and computers
+- Implement centralized policy management
+- Troubleshoot authentication and DNS issues
+- Maintain Active Directory infrastructure
+- Support Windows endpoints in a domain environment
+
+---
+
 # Future Enhancements
 
 Planned additions to this lab:
