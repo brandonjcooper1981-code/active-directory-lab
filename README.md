@@ -3,455 +3,179 @@
 ![VirtualBox](https://img.shields.io/badge/Oracle_VirtualBox-Lab-orange)
 ![Windows 11](https://img.shields.io/badge/Windows_11-Domain_Joined-success)
 
-# Active Directory Lab
+# Active Directory & File Server Lab
 
 ## Overview
 
-This project documents the deployment and administration of a Windows Server 2025 Active Directory environment built in Oracle VirtualBox. The lab demonstrates core Windows Server administration skills including Active Directory Domain Services (AD DS), DNS, Organizational Units (OUs), Group Policy Objects (GPOs), domain user management, workstation domain joins, and troubleshooting.
+Built a Windows Server 2022 Active Directory environment integrated with file sharing, NTFS permissions, security groups, and Group Policy.
+
+### Technologies
+
+- Windows Server 2022
+- Windows 11
+- Active Directory
+- Group Policy
+- SMB Shares
+- NTFS Permissions
+- Oracle VirtualBox
 
 ---
 
 ## Lab Architecture
 
-### Domain Controller
+DC01
+- Active Directory
+- DNS
+- File Server
 
-| Setting          | Value                                 |
-| ---------------- | ------------------------------------- |
-| Hostname         | DC01                                  |
-| Operating System | Windows Server 2025                   |
-| Domain           | lab.local                             |
-| IP Address       | 192.168.56.10                         |
-| Roles            | Active Directory Domain Services, DNS |
+CLIENT01
+- Domain Joined Workstation
 
-### Client Workstation
-
-| Setting          | Value          |
-| ---------------- | -------------- |
-| Hostname         | CLIENT01       |
-| Operating System | Windows 11 Pro |
-| Domain Joined    | Yes            |
-| IP Address       | 192.168.56.20  |
-| DNS Server       | 192.168.56.10  |
-
----
-
-## Network Diagram
-
-```text
-                     +----------------+
-                     |      DC01      |
-                     | Windows Server |
-                     | AD DS + DNS    |
-                     | 192.168.56.10  |
-                     +--------+-------+
-                              |
-                              |
-                    Host-Only Network
-                         192.168.56.0/24
-                              |
-                              |
-                     +--------+-------+
-                     |    CLIENT01    |
-                     | Windows 11 Pro |
-                     | 192.168.56.20  |
-                     +----------------+
-```
-
----
-
-## Technologies Used
-
-* Windows Server 2025
-* Windows 11 Pro
-* Oracle VirtualBox
-* Active Directory Domain Services (AD DS)
-* DNS
-* Group Policy Management
-* PowerShell
-* Command Prompt
-
----
-
-# Active Directory Configuration
-
-## Organizational Units
-
-Created Organizational Units (OUs) to logically separate users, computers, and administrative resources:
-
-* IT
-* HR
-* Sales
-* Servers
-* Workstations
-
-## Example User Accounts
-
-| Username | Department |
-| -------- | ---------- |
-| jsmith   | IT         |
-| mjones   | HR         |
-
----
-
-# Screenshots
-
-## Domain Controller Network Configuration
-
-DC01 was configured with a static IP address and DNS services to support Active Directory and domain authentication.
-
-![DC01 Network Configuration](screenshots/01-dc01-ipconfig.png)
-
----
-
-## Domain User Authentication
-
-Successful authentication to the domain using a domain user account.
-
-![Domain User Login](screenshots/02-domain-user-login.png)
-
----
-
-## Active Directory Organizational Units
-
-Organizational Units were created to organize users, computers, and administrative resources.
-
-![OU Structure](screenshots/03-active-directory-ou-structure.png)
-
----
-
-## Group Policy Configuration
-
-A Group Policy Object (GPO) named **Workstations Security Policy** was created and linked to the Workstations OU.
-
-Configured settings:
-
-* Minimum Password Length: 10 Characters
-* Password Complexity Requirements: Enabled
-
-![Group Policy Configuration](screenshots/04-group-policy-configuration.png)
-
----
-
-## Group Policy Verification
-
-Group Policy application was validated using:
-
-```powershell
-gpresult /scope computer /r
-```
-
-Verified Policies:
-
-* Workstations Security Policy
-* Default Domain Policy
-
-![Group Policy Verification](screenshots/05-gpo-verification.png)
-
----
-
-# Validation
-
-## Connectivity Verification
-
-```cmd
-ping 192.168.56.10
-```
-
-Result:
-
-```text
-0% packet loss
-```
-
-## DNS Verification
-
-```cmd
-nslookup lab.local
-```
-
-Result:
-
-```text
+Domain:
 lab.local
-192.168.56.10
-```
+
+---
+
+# Active Directory Deployment
+
+## Domain Controller
+
+![DC01](screenshots/01-dc01-ipconfig.png)
 
 ## Domain Join Verification
 
-CLIENT01 successfully joined:
+![Domain Join](screenshots/02-domain-user-login.png)
 
-```text
-lab.local
-```
+## Organizational Units
 
-Verified through successful domain authentication and Group Policy application.
+Created:
 
----
+- HR
+- IT
+- Sales
+- Servers
+- Workstations
 
-# Group Policy Management
+![OU Structure](screenshots/03-active-directory-ou-structure.png)
 
-Created and deployed:
+## Group Policy
 
-```text
-Workstations Security Policy
-```
+Configured:
 
-Policy Settings:
+- Password Complexity Enabled
+- Minimum Password Length = 10
 
-* Password Complexity Enabled
-* Minimum Password Length: 10 Characters
+![GPO](screenshots/04-group-policy-configuration.png)
 
-Verified using:
+## Policy Verification
 
-```powershell
-gpresult /scope computer /r
-```
-
-Applied Policies:
-
-* Workstations Security Policy
-* Default Domain Policy
+![GPResult](screenshots/05-gpo-verification.png)
 
 ---
 
-# File Server & NTFS Permissions Lab
+# File Server & NTFS Permissions
 
-## Objective
+## Department Shares
 
-Implement role-based access control (RBAC) using Active Directory security groups, SMB shares, and NTFS permissions.
+Created:
+
+- HR
+- IT
+- Sales
+
+![Shares](screenshots/06-file-server-shares.png)
 
 ## Security Groups
 
-- IT_RW
+Created:
+
 - HR_RW
+- IT_RW
 - Sales_RW
 
-## Folder Structure
+![Groups](screenshots/07-security-groups.png)
 
-```text
-C:\Shares
-├── IT
-├── HR
-└── Sales
-```
+## NTFS Permissions
 
-## Permissions Model
+IT_RW assigned Modify access to IT folder.
 
-### Share Permissions
+![NTFS](screenshots/08-ntfs-permissions.png)
 
-Authenticated Users:
-- Full Control
+## SMB Share Permissions
 
-### NTFS Permissions
-
-IT Folder:
-- IT_RW → Modify
-
-HR Folder:
-- HR_RW → Modify
-
-Sales Folder:
-- Sales_RW → Modify
-
-## Validation
-
-### Authorized Access
-
-User:
-
-```text
-LAB\jsmith
-```
-
-Successfully accessed:
-
-```text
-\\DC01\IT
-```
-
-### Unauthorized Access
-
-User:
-
-```text
-LAB\jsmith
-```
-
-Was denied access to:
-
-```text
-\\DC01\HR
-```
-
-## Skills Demonstrated
-
-- Active Directory Administration
-- SMB File Sharing
-- NTFS Permissions
-- Role-Based Access Control (RBAC)
-- Security Groups
-- Least Privilege Access
-- Windows Server Administration
+![Share Permissions](screenshots/09-share-permissions.png)
 
 ---
+
+# Access Testing
+
+## Authorized Access
+
+User jsmith successfully accessed:
+
+\\DC01\IT
+
+![Success](screenshots/10-share-access-success.png)
+
+## Unauthorized Access
+
+User denied access to:
+
+\\DC01\HR
+
+![Denied](screenshots/11-share-access-denied.png)
+
+---
+
 # Troubleshooting
 
-## Issue: CLIENT01 Unable to Reach Domain Controller
+## Issue: Domain Join Failed
 
-### Symptoms
+**Cause:** CLIENT01 pointed to incorrect DNS server.
 
-* Ping failures
-* DNS resolution failures
-* Domain join unsuccessful
+**Fix:** Configured DNS to:
 
-### Root Cause
-
-Incorrect network configuration on CLIENT01.
-
-### Resolution
-
-Configured static network settings:
-
-```text
-IP Address: 192.168.56.20
-Subnet Mask: 255.255.255.0
-DNS Server: 192.168.56.10
-```
-
-### Outcome
-
-* Successful network connectivity
-* Successful DNS resolution
-* Successful domain join
+192.168.56.10
 
 ---
 
-## Issue: Windows 11 Installation Would Not Boot
+## Issue: Group Policy Not Applying
 
-### Symptoms
+**Cause:** CLIENT01 not located in Workstations OU.
 
-```text
-No bootable device found
-```
+**Fix:** Moved workstation to correct OU and ran:
 
-### Root Cause
-
-Windows 11 ISO was not properly attached as a bootable optical drive.
-
-### Resolution
-
-Mounted the Windows 11 installation ISO as an optical drive within VirtualBox.
-
-### Outcome
-
-Windows 11 installed successfully.
+gpupdate /force
 
 ---
 
-## Issue: Group Policy Verification
+## Issue: Access Denied to IT Share
 
-### Symptoms
+**Cause:** Security group membership not refreshed.
 
-```text
-Applied Group Policy Objects: N/A
-```
+**Fix:** Verified using:
 
-### Root Cause
+whoami /groups
 
-User policy results were being reviewed while the configured policy existed under Computer Configuration.
-
-### Resolution
-
-Verified policy application using:
-
-```powershell
-gpresult /scope computer /r
-```
-
-### Outcome
-
-Successfully confirmed:
-
-* Workstations Security Policy
-* Default Domain Policy
+Logged off and back on.
 
 ---
 
 # Skills Demonstrated
 
-## Windows Administration
-
-* Active Directory Domain Services (AD DS)
-* DNS Administration
-* Group Policy Management
-* Organizational Unit Management
-* User and Group Administration
-* Domain Joins
-
-## Networking
-
-* Static IP Configuration
-* DNS Troubleshooting
-* Network Connectivity Testing
-* VirtualBox Network Configuration
-
-## Security
-
-* Password Policy Configuration
-* Group Policy Security Controls
-* Domain Authentication
-* Access Management
-
-## Troubleshooting
-
-* DNS Issues
-* Active Directory Connectivity
-* Group Policy Processing
-* Windows Networking
-* VirtualBox Configuration
+- Active Directory Administration
+- Group Policy Management
+- File Server Administration
+- NTFS Permissions
+- Security Groups
+- Access Control
+- Windows Server Administration
+- Troubleshooting
 
 ---
 
-## What I Learned
+# Author
 
-- Active Directory Domain Services deployment
-- DNS configuration and troubleshooting
-- Group Policy creation and validation
-- Organizational Unit design
-- Domain user administration
-- Windows 11 domain joins
-- PowerShell troubleshooting
-- VirtualBox networking configuration
+Brandon Cooper
 
----
-
-## Business Value
-
-This lab simulates a small enterprise Windows environment and demonstrates the ability to:
-
-- Manage domain users and computers
-- Implement centralized policy management
-- Troubleshoot authentication and DNS issues
-- Maintain Active Directory infrastructure
-- Support Windows endpoints in a domain environment
-
----
-
-# Future Enhancements
-
-Planned additions to this lab:
-
-* File Server Deployment
-* NTFS Permissions Lab
-* DHCP Server Configuration
-* Wazuh SIEM Integration
-* Security Onion Monitoring
-* Windows Event Log Analysis
-* Active Directory Security Auditing
-* Vulnerability Management
-
----
-
-## Disclaimer
-
-This environment was built for educational, training, and professional development purposes using Oracle VirtualBox. All users, systems, domains, and network configurations exist solely within a non-production lab environment.
+Cybersecurity | Active Directory | Windows Server | Networking
