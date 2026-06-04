@@ -115,7 +115,7 @@ Successful authentication to the domain using a domain user account.
 
 Organizational Units were created to organize users, computers, and administrative resources.
 
-![OU Structure](screenshots/03-ou-structure.png)
+![OU Structure](screenshots/03-active-directory-ou-structure.png)
 
 ---
 
@@ -128,7 +128,7 @@ Configured settings:
 * Minimum Password Length: 10 Characters
 * Password Complexity Requirements: Enabled
 
-![Group Policy Configuration](screenshots/04-gpo-configuration.png)
+![Group Policy Configuration](screenshots/04-group-policy-configuration.png)
 
 ---
 
