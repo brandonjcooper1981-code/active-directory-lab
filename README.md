@@ -3,26 +3,12 @@
 ![VirtualBox](https://img.shields.io/badge/Oracle_VirtualBox-Lab-orange)
 ![Windows 11](https://img.shields.io/badge/Windows_11-Domain_Joined-success)
 
-# Windows Server 2025 Enterprise Lab
+# Active Directory Lab
 
-> Windows Server 2025 Active Directory environment built in Oracle VirtualBox featuring AD DS, DNS, Group Policy, Organizational Units, domain users, and a Windows 11 domain-joined workstation.
 ## Overview
 
 This project documents the deployment and administration of a Windows Server 2025 Active Directory environment built in Oracle VirtualBox. The lab demonstrates core Windows Server administration skills including Active Directory Domain Services (AD DS), DNS, Organizational Units (OUs), Group Policy Objects (GPOs), domain user management, workstation domain joins, and troubleshooting.
----
-## Table of Contents
 
-- [Overview](#overview)
-- [Lab Architecture](#lab-architecture)
-- [Network Diagram](#network-diagram)
-- [Technologies Used](#technologies-used)
-- [Active Directory Configuration](#active-directory-configuration)
-- [Group Policy Configuration](#group-policy-configuration)
-- [File Server & NTFS Permissions Lab](#file-server--ntfs-permissions-lab)
-- [Validation](#validation)
-- [Troubleshooting](#troubleshooting)
-- [Skills Demonstrated](#skills-demonstrated)
-- [Future Enhancements](#future-enhancements)
 ---
 
 ## Lab Architecture
@@ -85,19 +71,7 @@ This project documents the deployment and administration of a Windows Server 202
 * Command Prompt
 
 ---
-## Key Accomplishments
 
-- Deployed Windows Server 2025 Domain Controller
-- Configured Active Directory Domain Services (AD DS)
-- Configured DNS for domain resolution
-- Created Organizational Units (OUs)
-- Created and managed domain users
-- Joined Windows 11 workstation to domain
-- Created and linked Group Policy Objects (GPOs)
-- Verified policy application using gpresult
-- Troubleshot networking and DNS issues
-
----  
 # Active Directory Configuration
 
 ## Organizational Units
@@ -123,12 +97,7 @@ Created Organizational Units (OUs) to logically separate users, computers, and a
 
 ## Domain Controller Network Configuration
 
-DC01 was configured with a static IP address and DNS services to support Active Directory Domain Services (AD DS) and domain authentication within the lab environment.
-
-- Hostname: DC01
-- Domain: lab.local
-- IPv4 Address: 192.168.56.10
-- DNS Server: 192.168.56.10
+DC01 was configured with a static IP address and DNS services to support Active Directory and domain authentication.
 
 ![DC01 Network Configuration](screenshots/01-dc01-ipconfig.png)
 
@@ -146,7 +115,7 @@ Successful authentication to the domain using a domain user account.
 
 Organizational Units were created to organize users, computers, and administrative resources.
 
-![OU Structure](screenshots/03-active-directory-ou-structure.png)
+![OU Structure](screenshots/03-ou-structure.png)
 
 ---
 
@@ -159,7 +128,7 @@ Configured settings:
 * Minimum Password Length: 10 Characters
 * Password Complexity Requirements: Enabled
 
-![Group Policy Configuration](screenshots/04-group-policy-configuration.png)
+![Group Policy Configuration](screenshots/04-gpo-configuration.png)
 
 ---
 
@@ -179,6 +148,8 @@ Verified Policies:
 ![Group Policy Verification](screenshots/05-gpo-verification.png)
 
 ---
+
+# Validation
 
 ## Connectivity Verification
 
@@ -243,125 +214,6 @@ Applied Policies:
 
 ---
 
-# File Server & NTFS Permissions Lab
-
-## Objective
-
-Implement role-based access control (RBAC) using Active Directory security groups, SMB shares, and NTFS permissions.
-
-## Security Groups
-
-Created security groups for departmental access control.
-
-![Security Groups](screenshots/06-security-groups.png)
-- IT_RW
-- HR_RW
-- Sales_RW
-
-## Folder Structure
-
-```text
-C:\Shares
-├── IT
-├── HR
-└── Sales
-```
-
-## Permissions Model
-
-### Share Permissions
-
-Configured SMB share permissions.
-
-![Share Permissions](screenshots/08-it-share-permissions.png)
-
-Authenticated Users:
-- Full Control
-
-### NTFS Permissions
-
-Configured least-privilege NTFS permissions.
-
-![NTFS Permissions](screenshots/07-ntfs-permissions.png)
-IT Folder:
-- IT_RW → Modify
-
-HR Folder:
-- HR_RW → Modify
-
-Sales Folder:
-- Sales_RW → Modify
-
-## Validation
-
-Verified domain controller network configuration.
-
-![DC01 IP Configuration](screenshots/01-dc01-ipconfig.png)
-
-Verified successful domain login.
-
-![Domain User Login](screenshots/02-domain-user-login.png)
-
-### Authorized Access
-
-Verified that LAB\jsmith could access the IT share.
-
-![IT Share Access](screenshots/09-it-share-success.png)
-User:
-
-```text
-LAB\jsmith
-```
-
-Successfully accessed:
-
-```text
-\\DC01\IT
-```
-
-### Unauthorized Access
-
-Verified that LAB\jsmith was denied access to the HR share.
-
-![Access Denied](screenshots/10-hr-access-denied.png)
-User:
-
-```text
-LAB\jsmith
-```
-
-Was denied access to:
-
-```text
-\\DC01\HR
-```
-
-## Skills Demonstrated
-
-- Active Directory Administration
-- SMB File Sharing
-- NTFS Permissions
-- Role-Based Access Control (RBAC)
-- Security Groups
-- Least Privilege Access
-- Windows Server Administration
-- File sharing
-- NTFS permissions
-- Security groups
-- Access control
-- Group Policy drive mapping
-- Least privilege
-- Active Directory Domain Services (AD DS)
-- DNS Administration
-- Organizational Unit (OU) Management
-- Group Policy Management
-- Windows Server 2025 Administration
-- Windows 11 Domain Integration
-- SMB File Sharing
-- Security Group Administration
-- User and Computer Account Management
-- Network Troubleshooting
-- VirtualBox Virtualization
 # Troubleshooting
 
 ## Issue: CLIENT01 Unable to Reach Domain Controller
@@ -470,8 +322,6 @@ Successfully confirmed:
 * Domain Authentication
 * Access Management
 
----
-
 ## Troubleshooting
 
 * DNS Issues
@@ -481,29 +331,7 @@ Successfully confirmed:
 * VirtualBox Configuration
 
 ---
-## What I Learned
 
-- Active Directory Domain Services deployment
-- DNS configuration and troubleshooting
-- Group Policy creation and validation
-- Organizational Unit design
-- Domain user administration
-- Windows 11 domain joins
-- PowerShell troubleshooting
-- VirtualBox networking configuration
-
----
-## Business Value
-
-This lab simulates a small enterprise Windows environment and demonstrates the ability to:
-
-- Manage domain users and computers
-- Implement centralized policy management
-- Troubleshoot authentication and DNS issues
-- Maintain Active Directory infrastructure
-- Support Windows endpoints in a domain environment
-
----
 # Future Enhancements
 
 Planned additions to this lab:
@@ -522,4 +350,3 @@ Planned additions to this lab:
 ## Disclaimer
 
 This environment was built for educational, training, and professional development purposes using Oracle VirtualBox. All users, systems, domains, and network configurations exist solely within a non-production lab environment.
-
