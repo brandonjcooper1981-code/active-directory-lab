@@ -103,7 +103,7 @@ IT_RW assigned Modify access to IT folder.
 
 ## SMB Share Permissions
 
-![Share Permissions](screenshots/09-share-permissions.png)
+![Share Permissions](screenshots/09-it-share-permissions.png)
 
 ---
 
@@ -115,7 +115,7 @@ User jsmith successfully accessed:
 
 \\DC01\IT
 
-![Success](screenshots/10-share-access-success.png)
+![Success](screenshots/10-it-share-success.png)
 
 ## Unauthorized Access
 
@@ -123,7 +123,7 @@ User denied access to:
 
 \\DC01\HR
 
-![Denied](screenshots/11-share-access-denied.png)
+![Denied](screenshots/11-hr-access-denied.png)
 
 ---
 
