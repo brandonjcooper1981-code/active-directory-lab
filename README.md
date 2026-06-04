@@ -214,6 +214,86 @@ Applied Policies:
 
 ---
 
+# File Server & NTFS Permissions Lab
+
+## Objective
+
+Implement role-based access control (RBAC) using Active Directory security groups, SMB shares, and NTFS permissions.
+
+## Security Groups
+
+- IT_RW
+- HR_RW
+- Sales_RW
+
+## Folder Structure
+
+```text
+C:\Shares
+├── IT
+├── HR
+└── Sales
+```
+
+## Permissions Model
+
+### Share Permissions
+
+Authenticated Users:
+- Full Control
+
+### NTFS Permissions
+
+IT Folder:
+- IT_RW → Modify
+
+HR Folder:
+- HR_RW → Modify
+
+Sales Folder:
+- Sales_RW → Modify
+
+## Validation
+
+### Authorized Access
+
+User:
+
+```text
+LAB\jsmith
+```
+
+Successfully accessed:
+
+```text
+\\DC01\IT
+```
+
+### Unauthorized Access
+
+User:
+
+```text
+LAB\jsmith
+```
+
+Was denied access to:
+
+```text
+\\DC01\HR
+```
+
+## Skills Demonstrated
+
+- Active Directory Administration
+- SMB File Sharing
+- NTFS Permissions
+- Role-Based Access Control (RBAC)
+- Security Groups
+- Least Privilege Access
+- Windows Server Administration
+
+---
 # Troubleshooting
 
 ## Issue: CLIENT01 Unable to Reach Domain Controller
